@@ -6,7 +6,19 @@
   
   
   <mapper namespace="com.Dapao.mapper.ProdMapper">
- 	<select id="searchProd" resultType="prodVO">
- 		selelct * prod where #{prod.name},#{prod.cate},#{prod.state}  
+ 	<select id="searchProd" resultType="ProdVO">
+ 		select * from product 
+ 		<where>
+        <if test='prod_name != null and prod_name != ""'>
+            AND prod_name = #{prod_name} 
+        </if>
+        <if test='prod_cate != null and prod_cate != ""'>
+            AND prod_cate = #{prod_cate} 
+        </if>
+        <if test='prod_state != null and prod_state != ""'>
+            AND prod_state = #{prod_state} 
+        </if>
+    </where>
+
  	</select>
  </mapper>

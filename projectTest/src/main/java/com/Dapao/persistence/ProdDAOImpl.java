@@ -17,12 +17,12 @@ public class ProdDAOImpl implements ProdDAO {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	private static final String NAMESPACE = "com.Dapao.mapper.prodMapper";
+	private static final String NAMESPACE = "com.Dapao.mapper.ProdMapper";
 	@Override
 	public List<ProdVO> searchProd(ProdVO vo) {
 		logger.debug(" DAO->searchProd()호출 ");
-		
-		return sqlsession.selectOne(NAMESPACE+"", vo);
+		logger.debug(" sqlsession : "+sqlsession.selectList(NAMESPACE+".searchProd", vo));
+		return sqlsession.selectList(NAMESPACE+".searchProd", vo);
 	}
 
 }

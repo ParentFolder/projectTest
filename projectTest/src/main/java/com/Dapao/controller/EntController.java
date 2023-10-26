@@ -38,6 +38,7 @@ public class EntController {
 		public void productManagePOST(ProdVO vo, Model model) throws Exception {
 			logger.debug(" productManagerPOST() ");
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
+			logger.debug(" vo : "+vo);
 			List<ProdVO> plist = pService.searchProd(vo);
 			model.addAttribute("plist", plist);
 			
