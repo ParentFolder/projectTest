@@ -34,7 +34,7 @@ public class EntController {
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
 		}
 		// http://localhost:8088/ent/productManage
-		@RequestMapping(value = "/productManage", method = RequestMethod.GET)
+		@RequestMapping(value = "/productManage", method = RequestMethod.POST)
 		public void productManagePOST(ProdVO vo, Model model) throws Exception {
 			logger.debug(" productManagerPOST() ");
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");

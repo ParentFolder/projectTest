@@ -6,6 +6,6 @@
 <!-- mybatis-config.xml mybatis 설정정보 --> 
   <configuration>
   	<typeAliases>
-  		<package name="com.itwillbs.domain"/>
+  		<package name="com.Dapao.domain"/>
   	</typeAliases>
   </configuration>
