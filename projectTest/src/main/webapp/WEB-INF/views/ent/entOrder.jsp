@@ -12,10 +12,6 @@
 	<form action="">
 		<table>
 			<tr>
-				<td>조회기간</td>
-				<td><input type="date" name="date_start"> <input type="date" name="date_end"></td>
-			</tr>
-			<tr>
 				<td>검색</td>
 				
 				<td colspan="2">

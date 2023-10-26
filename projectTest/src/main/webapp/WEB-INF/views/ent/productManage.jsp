@@ -32,7 +32,7 @@
 		<div><p>상품 등록/수정/조회</p></div>
 		<div class="">
 			<input type="button" value="상품등록">
-			<form action="" method="get">			
+			<form action="" method="post">			
 				<table border="1">
 					<tr>
 						<td>상품조회</td>
@@ -58,13 +58,7 @@
 							<input type="checkbox" name="s_state" id="check2"><label for="check1">완료</label>
 						</td>
 					</tr>
-					<tr>
-						<td>조회기간</td>
-						<td>
-							<input type="date" name="date_start">
-							<input type="date" name="date_end">
-						</td>
-					</tr>
+			
 				</table>
 				<input type="submit" value="조회하기">
 			</form>
@@ -91,5 +85,7 @@
 		</div>
 	
 	</div>
+	
+
 </body>
 </html>
