@@ -8,12 +8,10 @@ public class ProdVO {
 	private Integer prod_no;
 	private String prod_name;
 	private String prod_price;
-	private String prod_state;
+	private String prod_con;
 	private String prod_content;
 	private String prod_cate;
-	private String prod_img1;
-	private String prod_img2;
-	private String prod_img3;
+	private String prod_img;
 	private String own_id;
 
 }

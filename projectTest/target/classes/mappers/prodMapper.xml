@@ -15,8 +15,8 @@
         <if test='prod_cate != null and prod_cate != ""'>
             AND prod_cate = #{prod_cate} 
         </if>
-        <if test='prod_state != null and prod_state != ""'>
-            AND prod_state = #{prod_state} 
+        <if test='prod_con != null and prod_con != ""'>
+            AND prod_con = #{prod_con} 
         </if>
     </where>
 
