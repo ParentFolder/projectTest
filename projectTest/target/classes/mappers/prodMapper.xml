@@ -21,4 +21,17 @@
     </where>
 
  	</select>
+ 	
+ 	<update id="updateProd">
+ 		update product 
+ 		set prod_name = #{prod_name}, prod_price = #{prod_price}, prod_con = #{prod_con}, 
+ 			prod_content = #{prod_content}, prod_cate = #{prod_cate}, prod_img = #{prod_img}   
+ 		where prod_no = #{prod_no} 
+ 	</update>
+ 	
+ 	<insert id="insertProd">
+ 		insert into product 
+ 		values(#{prod_name}, #{prod_price}, #{prod_con}, #{prod_content}, 
+ 			   #{prod_cate}, #{prod_img}, #{own_id}) 
+ 	</insert>
  </mapper>

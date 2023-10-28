@@ -21,5 +21,15 @@ public class ProdServiceImpl implements ProdService{
 		
 		return pdao.searchProd(vo);
 	}
-
+	@Override
+	public void updateProd(ProdVO vo) throws Exception {
+		logger.debug(" updatePord(ProdVO vo) 호출 ");
+		pdao.updateProd(vo);
+	}
+	@Override
+	public void insertProd(ProdVO vo) throws Exception {
+		logger.debug(" insertPord(ProdVO vo) 호출 ");
+		pdao.insertProd(vo);
+	}
+	
 }

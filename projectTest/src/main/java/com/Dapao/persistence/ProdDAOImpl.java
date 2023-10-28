@@ -24,5 +24,15 @@ public class ProdDAOImpl implements ProdDAO {
 		logger.debug(" sqlsession : "+sqlsession.selectList(NAMESPACE+".searchProd", vo));
 		return sqlsession.selectList(NAMESPACE+".searchProd", vo);
 	}
-
+	@Override
+	public void updateProd(ProdVO vo) {
+		logger.debug(" DAO -> updateProd(ProdVO vo) 호출 ");
+		sqlsession.update(NAMESPACE+".updateProd", vo);
+	}
+	@Override
+	public void insertProd(ProdVO vo) {
+		logger.debug(" DAO -> insertProd(ProdVO vo) 호출 ");
+		sqlsession.update(NAMESPACE+".insertProd", vo);
+	}
+	
 }
