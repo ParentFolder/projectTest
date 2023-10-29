@@ -32,7 +32,7 @@ public class ProdDAOImpl implements ProdDAO {
 	@Override
 	public void insertProd(ProdVO vo) {
 		logger.debug(" DAO -> insertProd(ProdVO vo) 호출 ");
-		sqlsession.update(NAMESPACE+".insertProd", vo);
+		sqlsession.insert(NAMESPACE+".insertProd", vo);
 	}
 	
 }

@@ -24,7 +24,13 @@ public class EntController {
 		private ProdService pService; 
 		// http://localhost:8088/ent/shopMain
 		@RequestMapping(value = "/shopMain", method = RequestMethod.GET)
-		public void entMainGET() {
+		public void shopMainGET() {
+			logger.debug(" shopMainGET() ");
+			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
+		}
+		// http://localhost:8088/ent/shopMainManage
+		@RequestMapping(value = "/shopMainManage", method = RequestMethod.GET)
+		public void shopMainManageGET() {
 			logger.debug(" shopMainGET() ");
 			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
 		}

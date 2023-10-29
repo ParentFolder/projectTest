@@ -1,8 +1,8 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp"%>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!-- <script -->
 <!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
 <!-- <script -->
@@ -170,7 +170,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="prod_file">상품이미지</label> <input type="file"
+								<label for="prod_img">상품이미지</label> <input type="file"
 									id="prod_img" name="prod_img">
 								<p class="help-block">Example block-level help text here.</p>
 							</div>
