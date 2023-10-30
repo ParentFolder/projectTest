@@ -3,7 +3,7 @@ package com.Dapao.domain;
 import lombok.Data;
 
 @Data
-public class TrateVO {
+public class TradeVO {
 	
 	private Integer tr_no;
 	private String tr_sell_ent;

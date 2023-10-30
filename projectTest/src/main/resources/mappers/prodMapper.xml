@@ -21,6 +21,10 @@
     </where>
 
  	</select>
+ 	<select id="listProd" resultType="ProdVO">
+ 		select * from product 
+ 		where own_id = ${own_id}
+ 	</select>
  	
  	<update id="updateProd">
  		update product 
@@ -30,7 +34,7 @@
  	</update>
  	
  	<insert id="insertProd">
- 		insert into product 
+ 		insert into product(prod_name, prod_price, prod_con, prod_content, prod_cate, prod_img, own_id) 
  		values(#{prod_name}, #{prod_price}, #{prod_con}, #{prod_content}, 
  			   #{prod_cate}, #{prod_img}, #{own_id}) 
  	</insert>

@@ -36,7 +36,7 @@
 	<div class="search_container">
 		<input type="button" value="상품등록" class="btn btn-success"
 			data-toggle="modal" data-target="#modal-default"
-			data-own_id="7"
+			data-own_id="${ent.own_id }"
 			data-modal_cate=0>
 		<form action="" method="post">
 			<table class="table table-hover">
@@ -134,7 +134,9 @@
 
 
 					<form role="form" action="/ent/productUpdate" method="post">
-						<input type="hidden" name="prod_no" id="prod_no">
+						<c:if test="${modal_cate eq 1 }">
+							<input type="hidden" name="prod_no" id="prod_no">
+						</c:if>
 						<input type="hidden" name="own_id" id="own_id">
 						<input type="hidden" name="modal_cate" id ="modal_cate">
 						<div class="box-body">
@@ -148,6 +150,7 @@
 							</div>
 							<div class="form-group">
 								<label>제품상태</label>
+								
 								<input type="radio" name="prod_con" value="중고" id="p_radio1">
 								<label for="p_radio1">중고</label> <input type="radio"
 									name="prod_con" value="새상품" id="p_radio2"> <label
@@ -183,9 +186,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left"
+				<button type="button" class="btn btn-default pull-right"
 					data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
 		</div>
 
@@ -213,6 +215,7 @@
 			var own_id = $(e.relatedTarget).data('own_id')*1;
 			var modal_cate = $(e.relatedTarget).data('modal_cate')*1;
 			console.log(own_id);
+			console.log(prod_con);
 			if (prod_con == '새상품') {
 				$('#p_radio2').attr("checked", true);
 			} else {

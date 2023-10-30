@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.Dapao.domain.EntVO;
 import com.Dapao.domain.ProdVO;
+import com.Dapao.domain.ReviewVO;
+import com.Dapao.service.EntService;
 import com.Dapao.service.ProdService;
 
 @Controller
@@ -22,17 +25,65 @@ public class EntController {
 		private static final Logger logger = LoggerFactory.getLogger(EntController.class);
 		@Autowired
 		private ProdService pService; 
+		@Autowired
+		private EntService eService;
+		
 		// http://localhost:8088/ent/shopMain
 		@RequestMapping(value = "/shopMain", method = RequestMethod.GET)
-		public void shopMainGET() {
-			logger.debug(" shopMainGET() ");
+		public void shopMainGET(EntVO eVo, ReviewVO rVo, Model model) throws Exception {
+			logger.debug(" shopMainGET(EntVO eVO, ProdVO pVO, ReviewVO rVO, Model model) 호출 ");
+			String own_id = "6";
+			eVo.setOwn_id(own_id);
+			logger.debug("eService.listEnt(eVo): "+eService.listEnt(eVo));
+			List<ProdVO> plist = pService.listProd(eVo);
+			logger.debug(" plist : "+plist);
+			
+			model.addAttribute("ent", eService.listEnt(eVo));
+			model.addAttribute("plist", plist);
+			
+			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
+		}
+		
+		// http://localhost:8088/ent/shopMain
+//		@RequestMapping(value = "/shopMain", method = RequestMethod.POST)
+//		public void shopMainPOST(EntVO eVo, ReviewVO rVo, Model model) throws Exception {
+//			logger.debug(" shopMainPOST(EntVO eVO, ProdVO pVO, ReviewVO rVO, Model model) 호출 ");
+//			String own_id = "6";
+//			eVo.setOwn_id(own_id);
+//			logger.debug("eService.listEnt(eVo): "+eService.listEnt(eVo));
+//			ProdVO pVo=null;
+//			pVo.setOwn_id(own_id);
+//			List<ProdVO> plist = pService.searchProd(pVo);
+//			
+//			model.addAttribute("ent", eService.listEnt(eVo));
+//			model.addAttribute("plist", plist);
+//			
+//			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
+//		}
+		// http://localhost:8088/ent/shopMainManage
+		@RequestMapping(value = "/shopMainManage", method = RequestMethod.GET)
+		public void shopMainManageGET(EntVO eVo, Model model) {
+			logger.debug(" shopMainManageGET(EntVO eVo, Model model) 호출 ");
+			String own_id = "6";
+			eVo.setOwn_id(own_id);
+			logger.debug(" eVO: "+eVo);
+			logger.debug("eService.listEnt(eVo): "+eService.listEnt(eVo));
+			model.addAttribute("ent", eService.listEnt(eVo));
+			
 			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
 		}
 		// http://localhost:8088/ent/shopMainManage
-		@RequestMapping(value = "/shopMainManage", method = RequestMethod.GET)
-		public void shopMainManageGET() {
-			logger.debug(" shopMainGET() ");
-			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
+		@RequestMapping(value = "/shopMainManage", method = RequestMethod.POST)
+		public void shopMainManagePOST(EntVO eVo, Model model) {
+			logger.debug(" shopMainManagePOST(EntVO eVo, Model model) 호출 ");
+			String id = "6";
+			eVo.setOwn_id(id);
+			logger.debug(" eVo : "+eVo);
+			eService.entUpdate(eVo);
+			logger.debug("eService.listEnt(eVo): "+eService.listEnt(eVo));
+			model.addAttribute("ent", eService.listEnt(eVo));
+			
+			logger.debug(" 연결된 뷰페이지(/views/ent/shopMainManage.jsp) 출력 ");
 		}
 
 		// http://localhost:8088/ent/productManage
@@ -42,22 +93,24 @@ public class EntController {
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
 			Integer modal_cate = 0;
 			session.setAttribute("modal_cate", modal_cate);
-			session.setAttribute("own_id", 7);
+			session.setAttribute("own_id", 6);
 		}
 		// http://localhost:8088/ent/productManage
 		@RequestMapping(value = "/productManage", method = RequestMethod.POST)
-		public void productManagePOST(ProdVO vo, Model model) throws Exception {
+		public void productManagePOST(ProdVO vo, EntVO eVO, Model model) throws Exception {
 			logger.debug(" productManagerPOST() ");
 			logger.debug(" vo : "+vo);
-			Integer modal_cate = 0;
 			List<ProdVO> plist = pService.searchProd(vo);
+			Integer modal_cate = 0;
+			eVO.setOwn_id("6");
+			model.addAttribute("ent", eVO);
 			model.addAttribute("plist", plist);
 			model.addAttribute("modal_cate", modal_cate);
 			
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
 		}
 
-		// http://localhost:8088/ent/order
+		// http://localhost:8088/ent/entOrder
 		@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
 		public void orderGET() {
 			logger.debug(" entOrderGET() ");
