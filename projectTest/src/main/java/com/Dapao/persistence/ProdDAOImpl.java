@@ -17,30 +17,30 @@ public class ProdDAOImpl implements ProdDAO {
 	private static final Logger logger = LoggerFactory.getLogger(ProdDAOImpl.class);
 	
 	@Autowired
-	private SqlSession sqlsession;
+	private SqlSession sqlSession;
 	private static final String NAMESPACE = "com.Dapao.mapper.ProdMapper";
 	@Override
 	public List<ProdVO> searchProd(ProdVO vo) {
 		logger.debug(" DAO->searchProd(ProdVO vo)호출 ");
-		logger.debug(" sqlsession : "+sqlsession.selectList(NAMESPACE+".searchProd", vo));
-		return sqlsession.selectList(NAMESPACE+".searchProd", vo);
+		logger.debug(" sqlsession : "+sqlSession.selectList(NAMESPACE+".searchProd", vo));
+		return sqlSession.selectList(NAMESPACE+".searchProd", vo);
 	}
 	
 	@Override
 	public List<ProdVO> listProd(EntVO vo) {
 		logger.debug(" DAO -> listProd(EntVO vo) 호출 ");
-		return sqlsession.selectList(NAMESPACE+".listProd", vo);
+		return sqlSession.selectList(NAMESPACE+".listProd", vo);
 	}
 
 	@Override
 	public void updateProd(ProdVO vo) {
 		logger.debug(" DAO -> updateProd(ProdVO vo) 호출 ");
-		sqlsession.update(NAMESPACE+".updateProd", vo);
+		sqlSession.update(NAMESPACE+".updateProd", vo);
 	}
 	@Override
 	public void insertProd(ProdVO vo) {
 		logger.debug(" DAO -> insertProd(ProdVO vo) 호출 ");
-		sqlsession.insert(NAMESPACE+".insertProd", vo);
+		sqlSession.insert(NAMESPACE+".insertProd", vo);
 	}
 	
 }

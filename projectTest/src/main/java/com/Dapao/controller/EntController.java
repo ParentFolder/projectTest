@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.Dapao.domain.EntVO;
 import com.Dapao.domain.ProdVO;
 import com.Dapao.domain.ReviewVO;
+import com.Dapao.domain.TradeVO;
 import com.Dapao.service.EntService;
 import com.Dapao.service.ProdService;
 
@@ -44,22 +45,6 @@ public class EntController {
 			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
 		}
 		
-		// http://localhost:8088/ent/shopMain
-//		@RequestMapping(value = "/shopMain", method = RequestMethod.POST)
-//		public void shopMainPOST(EntVO eVo, ReviewVO rVo, Model model) throws Exception {
-//			logger.debug(" shopMainPOST(EntVO eVO, ProdVO pVO, ReviewVO rVO, Model model) 호출 ");
-//			String own_id = "6";
-//			eVo.setOwn_id(own_id);
-//			logger.debug("eService.listEnt(eVo): "+eService.listEnt(eVo));
-//			ProdVO pVo=null;
-//			pVo.setOwn_id(own_id);
-//			List<ProdVO> plist = pService.searchProd(pVo);
-//			
-//			model.addAttribute("ent", eService.listEnt(eVo));
-//			model.addAttribute("plist", plist);
-//			
-//			logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
-//		}
 		// http://localhost:8088/ent/shopMainManage
 		@RequestMapping(value = "/shopMainManage", method = RequestMethod.GET)
 		public void shopMainManageGET(EntVO eVo, Model model) {
@@ -112,8 +97,21 @@ public class EntController {
 
 		// http://localhost:8088/ent/entOrder
 		@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
-		public void orderGET() {
+		public void orderGET(EntVO vo, Model model) {
 			logger.debug(" entOrderGET() ");
+			
+			
+			logger.debug(" 연결된 뷰페이지(/views/entOrder.jsp)출력 ");
+		}
+		// http://localhost:8088/ent/entOrder
+		@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
+		public void orderPOST(EntVO eVo,String search_cate, String search, Model model) {
+			logger.debug(" entOrderPOST(EntVO eVo, String search, Model model) 호출 ");
+			logger.debug(" eVo : "+eVo);
+			
+			
+			
+			
 			logger.debug(" 연결된 뷰페이지(/views/entOrder.jsp)출력 ");
 		}
 		@RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
