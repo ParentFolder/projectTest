@@ -3,39 +3,63 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  
-  <mapper namespace="com.Dapao.mapper.ProdMapper">
- 	<select id="searchProd" resultType="ProdVO">
- 		select * from product 
- 		<where>
-        <if test='prod_name != null and prod_name != ""'>
-            AND prod_name = #{prod_name} 
-        </if>
-        <if test='prod_cate != null and prod_cate != ""'>
-            AND prod_cate = #{prod_cate} 
-        </if>
-        <if test='prod_con != null and prod_con != ""'>
-            AND prod_con = #{prod_con} 
-        </if>
-    </where>
 
- 	</select>
- 	<select id="listProd" resultType="ProdVO">
- 		select * from product 
- 		where own_id = ${own_id}
- 	</select>
- 	
- 	<update id="updateProd">
- 		update product 
- 		set prod_name = #{prod_name}, prod_price = #{prod_price}, prod_con = #{prod_con}, 
- 			prod_content = #{prod_content}, prod_cate = #{prod_cate}, prod_img = #{prod_img}   
- 		where prod_no = #{prod_no} 
- 	</update>
- 	
- 	<insert id="insertProd">
- 		insert into product(prod_name, prod_price, prod_con, prod_content, prod_cate, prod_img, own_id) 
- 		values(#{prod_name}, #{prod_price}, #{prod_con}, #{prod_content}, 
- 			   #{prod_cate}, #{prod_img}, #{own_id}) 
- 	</insert>
- </mapper>
+
+<mapper namespace="com.Dapao.mapper.ProdMapper">
+	<select id="searchProd" resultType="ProdVO">
+		select * from product
+		where own_id=#{p_vo.own_id}
+		<if test='p_vo.prod_name != null and p_vo.prod_name != ""'>
+			AND prod_name like concat('%',#{p_vo.prod_name},'%')
+		</if>
+		<if test='p_vo.prod_cate != null and p_vo.prod_cate != ""'>
+			AND prod_cate = #{p_vo.prod_cate}
+		</if>
+		<if test='p_vo.prod_con != null and p_vo.prod_con != ""'>
+			AND prod_con = #{p_vo.prod_con}
+		</if>
+		order by prod_no desc
+		limit #{page_start},#{page_size}
+
+	</select>
+	<select id="listProd" resultType="ProdVO">
+		select * from product
+		where
+		own_id = #{own_id}
+	</select>
+
+	<update id="updateProd">
+		update product 
+		set prod_name = #{prod_name}, prod_price = #{prod_price}, 
+		prod_con = #{prod_con}, prod_content = #{prod_content}, 
+		prod_cate = #{prod_cate}, prod_img = #{prod_img} 
+		where prod_no = #{prod_no}
+	</update>
+
+	<insert id="insertProd">
+		insert into product(prod_name, prod_price, prod_con,
+		prod_content,
+		prod_cate, prod_img, own_id)
+		values(#{prod_name},
+		#{prod_price}, #{prod_con}, #{prod_content},
+		#{prod_cate}, #{prod_img},
+		#{own_id})
+	</insert>
+	<!-- 전체 개수 -->
+	<select id="getProdList" resultType="int">
+		select count(*) from product
+		where own_id = #{own_id}
+	</select>
+	<!-- 전체 개수 -->
+
+	<!-- 페이징 처리 후 글 리스트 조회 -->
+	<select id="listPage" resultType="ProdVO">
+		select * from product
+		where
+		own_id = #{own_id}
+		order by prod_no desc
+		limit
+		#{page_start},#{page_size}
+	</select>
+	<!-- 페이징 처리 후 글 리스트 조회 -->
+</mapper>

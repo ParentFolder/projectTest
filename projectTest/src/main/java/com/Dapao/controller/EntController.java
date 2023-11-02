@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.Dapao.domain.EntVO;
+import com.Dapao.domain.PageVO;
 import com.Dapao.domain.ProdVO;
 import com.Dapao.domain.ReviewVO;
 import com.Dapao.domain.TradeVO;
@@ -78,19 +79,23 @@ public class EntController {
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
 			Integer modal_cate = 0;
 			session.setAttribute("modal_cate", modal_cate);
-			session.setAttribute("own_id", 6);
+			session.setAttribute("own_id", "6");
+
 		}
 		// http://localhost:8088/ent/productManage
 		@RequestMapping(value = "/productManage", method = RequestMethod.POST)
-		public void productManagePOST(ProdVO vo, EntVO eVO, Model model) throws Exception {
+		public void productManagePOST(ProdVO vo, EntVO eVo, Model model,PageVO pVo) throws Exception {
 			logger.debug(" productManagerPOST() ");
 			logger.debug(" vo : "+vo);
-			List<ProdVO> plist = pService.searchProd(vo);
+			pVo.setP_vo(vo);
+			pVo.setTotalCount(pService.getProdList(vo.getOwn_id()));
+			logger.debug(" pVo : "+pVo);
+			List<ProdVO> plist = pService.searchProd(pVo);
 			Integer modal_cate = 0;
-			eVO.setOwn_id("6");
-			model.addAttribute("ent", eVO);
+			model.addAttribute("ent", eVo);
 			model.addAttribute("plist", plist);
 			model.addAttribute("modal_cate", modal_cate);
+			model.addAttribute("pageVO", pVo);
 			
 			logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
 		}
@@ -104,7 +109,7 @@ public class EntController {
 			logger.debug(" 연결된 뷰페이지(/views/entOrder.jsp)출력 ");
 		}
 		// http://localhost:8088/ent/entOrder
-		@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
+		@RequestMapping(value = "/entOrder", method = RequestMethod.POST)
 		public void orderPOST(EntVO eVo,String search_cate, String search, Model model) {
 			logger.debug(" entOrderPOST(EntVO eVo, String search, Model model) 호출 ");
 			logger.debug(" eVo : "+eVo);
@@ -128,5 +133,29 @@ public class EntController {
 			}
 			return "redirect:/ent/productManage";
 		}
+		// 게시판 목록조회(페이징처리)
+		// http://localhost:8088/board/listPage
+		@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+		public void listPageGET(PageVO vo, Model model, HttpSession session) throws Exception {
+			logger.debug(" listPageGET() 호출 ");
+			// 페이징처리( 페이지 블럭 처리 객체)
+			String own_id =(String) session.getAttribute("own_id");
+			logger.debug(" own_id : "+own_id);
+			ProdVO pVo = new ProdVO();
+			pVo.setOwn_id(own_id);
+			vo.setP_vo(pVo);
+			vo.setTotalCount(pService.getProdList(own_id));
+			logger.debug("TotalCount : "+vo.getTotal_count());
+			logger.debug(" vo : "+vo);
+			List<ProdVO> plist = pService.searchProd(vo);
+
+			// 리스트 사이즈 확인
+			logger.debug(" 글 개수 : " +plist.size());
+
+			// Model 객체에 리스트 정보를 저장
+			model.addAttribute("plist", plist);
+			model.addAttribute("pageVO", vo);
+		}
+
 }
 

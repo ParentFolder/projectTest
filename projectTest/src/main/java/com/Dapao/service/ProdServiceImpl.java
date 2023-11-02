@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Dapao.domain.EntVO;
+import com.Dapao.domain.PageVO;
 import com.Dapao.domain.ProdVO;
 import com.Dapao.persistence.ProdDAO;
 
@@ -18,7 +19,7 @@ public class ProdServiceImpl implements ProdService{
 	@Autowired
 	private ProdDAO pdao;
 	@Override
-	public List<ProdVO> searchProd(ProdVO vo) throws Exception{
+	public List<ProdVO> searchProd(PageVO vo) throws Exception{
 		
 		return pdao.searchProd(vo);
 	}
@@ -37,6 +38,18 @@ public class ProdServiceImpl implements ProdService{
 	public void insertProd(ProdVO vo) throws Exception {
 		logger.debug(" insertPord(ProdVO vo) 호출 ");
 		pdao.insertProd(vo);
+	}
+
+	@Override
+	public int getProdList(String own_id) throws Exception {
+		logger.debug(" getProdList(String own_id) 호출 ");
+		return pdao.getProdList(own_id);
+	}
+
+	@Override
+	public List<ProdVO> getListPage(PageVO vo) throws Exception {
+		logger.debug("  getListPage(ProdVO vo) 호출 ");
+		return pdao.getListPage(vo);
 	}
 	
 }

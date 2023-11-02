@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.Dapao.domain.EntVO;
+import com.Dapao.domain.PageVO;
 import com.Dapao.domain.ProdVO;
 
 @Repository
@@ -20,7 +21,7 @@ public class ProdDAOImpl implements ProdDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE = "com.Dapao.mapper.ProdMapper";
 	@Override
-	public List<ProdVO> searchProd(ProdVO vo) {
+	public List<ProdVO> searchProd(PageVO vo) {
 		logger.debug(" DAO->searchProd(ProdVO vo)호출 ");
 		logger.debug(" sqlsession : "+sqlSession.selectList(NAMESPACE+".searchProd", vo));
 		return sqlSession.selectList(NAMESPACE+".searchProd", vo);
@@ -42,5 +43,19 @@ public class ProdDAOImpl implements ProdDAO {
 		logger.debug(" DAO -> insertProd(ProdVO vo) 호출 ");
 		sqlSession.insert(NAMESPACE+".insertProd", vo);
 	}
+
+	@Override
+	public int getProdList(String own_id) {
+		logger.debug(" DAO -> getProdList() 호출 ");
+		return sqlSession.selectOne(NAMESPACE+".getProdList",own_id);
+	}
+
+	@Override
+	public List<ProdVO> getListPage(PageVO vo) {
+		logger.debug(" DAO -> getListPage(PageVO vo) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE+".listPage", vo);
+	}
+	
 	
 }
