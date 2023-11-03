@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Dapao.domain.EntVO;
+import com.Dapao.domain.PageVO;
+import com.Dapao.domain.TradeVO;
 import com.Dapao.persistence.EntDAO;
 
 @Service
@@ -28,4 +30,11 @@ public class EntServiceImpl implements EntService {
 		logger.debug(" sevice listEnt(String own_id) 호출 ");
 		return edao.listEnt(vo);
 	}
+
+	@Override
+	public List<TradeVO> searchTrade(PageVO vo) {
+		logger.debug(" seviced listTrade(String own_id) 호출 ");
+		return edao.searchTrade(vo);
+	}
+	
 }

@@ -6,6 +6,7 @@
 
 
 <mapper namespace="com.Dapao.mapper.ProdMapper">
+	<!-- 검색조건에 맞는 페이징처리된 물품검색 -->
 	<select id="searchProd" resultType="ProdVO">
 		select * from product
 		where own_id=#{p_vo.own_id}
@@ -20,8 +21,8 @@
 		</if>
 		order by prod_no desc
 		limit #{page_start},#{page_size}
-
 	</select>
+	<!-- 검색조건에 맞는 페이징처리된 물품검색 -->
 	<select id="listProd" resultType="ProdVO">
 		select * from product
 		where

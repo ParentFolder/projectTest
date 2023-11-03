@@ -20,12 +20,13 @@ public class ProdServiceImpl implements ProdService{
 	private ProdDAO pdao;
 	@Override
 	public List<ProdVO> searchProd(PageVO vo) throws Exception{
-		
+		logger.debug(" service searchProd(PageVO vo) 호출 ");
 		return pdao.searchProd(vo);
 	}
 	
 	@Override
 	public List<ProdVO> listProd(EntVO vo) {
+		logger.debug(" service listProd(EntVO vo) 호출 ");
 		return pdao.listProd(vo);
 	}
 

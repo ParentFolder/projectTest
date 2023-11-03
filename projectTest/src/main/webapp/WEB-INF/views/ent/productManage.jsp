@@ -71,8 +71,9 @@
 					<tr>
 						<th>제품번호</th>
 						<th>상품명</th>
-						<th>제품상태</th>						
+						<th>제품중고여부</th>						
 						<th>가격</th>
+						<th>제품상태
 						<th>수정</th>
 					</tr>
 					<c:if test="${!empty plist }">
@@ -82,6 +83,7 @@
 								<td class="name_value">${list.prod_name }</td>
 								<td class="con_value">${list.prod_con }</td>
 								<td class="price_value">${list.prod_price }</td>
+								<td class="state_value">${list.prod_state }</td>
 								<td>
 									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" <%-- 										data-prod="${list }" --%>
 										data-prod_no="${list.prod_no }" data-prod_name="${list.prod_name }" data-prod_con="${list.prod_con }" data-prod_price="${list.prod_price }" data-prod_content="${list.prod_content }" data-prod_cate="${list.prod_cate }" data-prod_img="${list.prod_img }" data-own_id="${list.own_id }" data-modal_cate=1>수정</button>

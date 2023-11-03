@@ -1,5 +1,7 @@
 package com.Dapao.domain;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -12,6 +14,9 @@ public class ProdVO {
 	private String prod_content;
 	private String prod_cate;
 	private String prod_img;
+	private String prod_state;
+	private Date prod_regdate;
+	private Date prod_outdate;
 	private String own_id;
 
 }

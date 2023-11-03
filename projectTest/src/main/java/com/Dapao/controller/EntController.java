@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Dapao.domain.EntVO;
 import com.Dapao.domain.PageVO;
@@ -101,18 +102,35 @@ public class EntController {
 		}
 
 		// http://localhost:8088/ent/entOrder
+		// http://localhost:8088/ent/entOrder?own_id=2
 		@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
-		public void orderGET(EntVO vo, Model model) {
+		public void orderGET(@RequestParam("own_id") String own_id, Model model) {
 			logger.debug(" entOrderGET() ");
-			
+			logger.debug(" own_id : "+own_id);
+		
+			model.addAttribute("own_id", own_id);
 			
 			logger.debug(" 연결된 뷰페이지(/views/entOrder.jsp)출력 ");
 		}
 		// http://localhost:8088/ent/entOrder
 		@RequestMapping(value = "/entOrder", method = RequestMethod.POST)
-		public void orderPOST(EntVO eVo,String search_cate, String search, Model model) {
+		public void orderPOST(PageVO vo ,String search_cate, String search, Model model) throws Exception {
 			logger.debug(" entOrderPOST(EntVO eVo, String search, Model model) 호출 ");
-			logger.debug(" eVo : "+eVo);
+			logger.debug(" pageVo "+vo);
+			if(search_cate.contains("prod")) {
+				ProdVO pVo = new ProdVO();
+				pVo.setProd_name(search);
+				vo.setP_vo(pVo);
+				// 검색조건이 상품명일경우
+				eService.searchTrade(vo);
+				// trade게시판 own_id이 가지고 있는 검색한 상품명을 검색
+				
+			}else {
+				// 검색조건이 주문번호일 경우
+				
+				// own_id이 받은 검색한 주문번호에 해당하는 것을 검색
+				
+			}
 			
 			
 			

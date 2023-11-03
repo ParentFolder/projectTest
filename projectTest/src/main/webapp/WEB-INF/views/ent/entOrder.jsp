@@ -4,8 +4,8 @@
 
 <div class="box box-info">
 	<form action="">
-
-		<table>
+		<input type="hidden" name="own_id" value="${own_id }" >
+		<table border=1>
 			<tr>
 				<td>검색</td>
 			<tr/>
@@ -47,18 +47,22 @@
 					<tr>
 						<th>상품번호</th>
 						<th>상품명</th>
-						<th>결제상태</th>
+						<th>구매자</th>
 						<th>결제일</th>
+						<th>관리</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="" var="tlist" items="" var="plist">
+					<c:forEach items="${tlist }" var="tlist">
 					<tr>
 						<td><a href="">${tlist.tr_no }</a></td>
 						<td>${tlist.tr_prod }</td>
 						<td><span class="label label-success">${plist.pay_state }</span></td>
 						<td>
 							${plist.pay_date }
+						</td>
+						<td>
+							<button type="button" class="btn btn-block btn-danger">환불</button>
 						</td>
 					</tr>
 					</c:forEach>

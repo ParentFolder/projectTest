@@ -39,7 +39,8 @@ public class PageVO {
 	
 	private boolean prev; // 이전
 	private boolean next; // 다음
-	private ProdVO p_vo;
+	private ProdVO p_vo; // 상품
+	private TradeVO t_vo; // 주문
 	private int displayPageNum = 10; // 페이지 블럭의 크기
 	
 	public int getPage_start() {

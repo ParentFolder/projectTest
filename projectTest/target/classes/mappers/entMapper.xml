@@ -3,17 +3,64 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  
+
+
 <mapper namespace="com.Dapao.mapper.EntMapper">
 	<update id="entUpdate">
-		update ent 
-		set ent_notice = #{ent_notice}, ent_info = #{ent_info}, ent_img = #{ent_img}, 
-			ent_ot = #{ent_ot}, ent_ct = #{ent_ct}
+		update ent
+		set ent_notice = #{ent_notice}, ent_info =
+		#{ent_info}, ent_img =
+		#{ent_img},
+		ent_ot = #{ent_ot}, ent_ct =
+		#{ent_ct}
 		where own_id = #{own_id}
 	</update>
 	<select id="listEnt" resultType="EntVO">
-		select * from ent 
-		where own_id = #{own_id}
+		select * from ent
+		where own_id =
+		#{own_id}
 	</select>
+
+	<!-- 리뷰글 조회 -->
+	<select id="listReview" resultType="ReviewVO">
+		select * from review
+		where
+		own_id=#{own_id}
+	</select>
+	<!-- 리뷰글 조회 -->
+
+	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
+	<select id="searchTrade" resultType="TradeVO">
+		select * from trade
+		where own_id=#{own_id}
+		<if test='t_vo.tr_name != null and t_vo.tr_name != ""'>
+			AND tr_prod like concat('%',#{t_vo.tr_name},'%')
+		</if>
+		<if test='t_vo.tr_no != null and t_vo.tr_no != ""'>
+			AND tr_no = #{t_vo.tr_no}
+		</if>
+		order by tr_no
+		limit #{page_start},#{page_size}
+	</select>
+	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
+
+	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
+	<select id="searchTrade" resultType="map">
+		select t.tr_no, t.tr_buy, t.tr_prod, p.prod_name,p.prod_price
+		from trade t inner join product p
+		on t.tr_prod=p.prod_no
+		where p.own_id= #{own_id}
+		<if test='p_vo.prod_name != null and p_vo.prod_name != ""'>
+			AND p.prod_name like '%test%'
+		</if>
+		<if test='t_vo.tr_no != null and t_vo.tr_no != ""'>
+			AND t.tr_no = #{t_vo.tr_no}
+		</if>
+		order by tr_no
+		limit #{page_start},#{page_size}
+	</select>
+	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
+
+
+
 </mapper>
