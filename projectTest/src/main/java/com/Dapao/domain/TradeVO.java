@@ -12,5 +12,7 @@ public class TradeVO {
 	private Integer tr_prod;
 	private Integer tr_item;
 	private Integer tr_price;
+	
+	private ProdVO prodVO;
 
 }

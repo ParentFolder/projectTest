@@ -102,7 +102,7 @@ public class EntController {
 		}
 
 		// http://localhost:8088/ent/entOrder
-		// http://localhost:8088/ent/entOrder?own_id=2
+		// http://localhost:8088/ent/entOrder?own_id=6
 		@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
 		public void orderGET(@RequestParam("own_id") String own_id, Model model) {
 			logger.debug(" entOrderGET() ");
@@ -114,26 +114,47 @@ public class EntController {
 		}
 		// http://localhost:8088/ent/entOrder
 		@RequestMapping(value = "/entOrder", method = RequestMethod.POST)
-		public void orderPOST(PageVO vo ,String search_cate, String search, Model model) throws Exception {
-			logger.debug(" entOrderPOST(EntVO eVo, String search, Model model) 호출 ");
+		public void orderPOST(PageVO vo ,String search_cate, String search, String own_id, Model model) throws Exception {
+			logger.debug(" entOrderPOST(PageVO vo, String search, Model model) 호출 ");
+			ProdVO pVo = new ProdVO();
 			logger.debug(" pageVo "+vo);
+			logger.debug(" own_id : "+own_id);
+			pVo.setOwn_id(own_id);
+			
+			List<TradeVO> tlist; 
 			if(search_cate.contains("prod")) {
-				ProdVO pVo = new ProdVO();
-				pVo.setProd_name(search);
-				vo.setP_vo(pVo);
 				// 검색조건이 상품명일경우
-				eService.searchTrade(vo);
+				logger.debug("상품명 주문조회");
+				pVo.setProd_name(search);
+				TradeVO tVo = new TradeVO();
+				Integer tr_no = null; // 안넣으면 비교를 못함
+				tVo.setTr_no(tr_no); 
+				vo.setT_vo(tVo);
+				vo.setP_vo(pVo);
+				vo.setTotal_count(eService.searchTradeCount(vo));
+				logger.debug(" pageVo "+vo);
 				// trade게시판 own_id이 가지고 있는 검색한 상품명을 검색
+				tlist = eService.searchTrade(vo);
+				logger.debug(" tlist : "+tlist);
+				model.addAttribute("tlist", tlist);
 				
-			}else {
+			}else if(search_cate.contains("tr_no")) {
+				logger.debug("주문번호 주문조회");
 				// 검색조건이 주문번호일 경우
-				
+				TradeVO tVo = new TradeVO();
+				Integer tr_no = Integer.parseInt(search);
+				tVo.setTr_no(tr_no);
+				vo.setP_vo(pVo);
+				vo.setT_vo(tVo);
+				vo.setTotal_count(eService.searchTradeCount(vo));
+				logger.debug(" pageVo "+vo);
 				// own_id이 받은 검색한 주문번호에 해당하는 것을 검색
-				
+				tlist = eService.searchTrade(vo);
+				model.addAttribute("tlist", tlist);
 			}
 			
 			
-			
+			model.addAttribute("pageVO", vo);
 			
 			logger.debug(" 연결된 뷰페이지(/views/entOrder.jsp)출력 ");
 		}

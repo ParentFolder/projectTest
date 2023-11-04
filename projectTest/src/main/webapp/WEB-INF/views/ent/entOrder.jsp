@@ -3,9 +3,9 @@
 <%@ include file="../include/header.jsp"%>
 
 <div class="box box-info">
-	<form action="">
-		<input type="hidden" name="own_id" value="${own_id }" >
-		<table border=1>
+	<form action="" method="post">
+<%-- 		<input type="hidden" name="own_id" value="${own_id }" > --%>
+		<table>
 			<tr>
 				<td>검색</td>
 			<tr/>
@@ -57,9 +57,9 @@
 					<tr>
 						<td><a href="">${tlist.tr_no }</a></td>
 						<td>${tlist.tr_prod }</td>
-						<td><span class="label label-success">${plist.pay_state }</span></td>
+						<td><span class="label label-success">${tlist.tr_buy }</span></td>
 						<td>
-							${plist.pay_date }
+							${plist.tr_date }
 						</td>
 						<td>
 							<button type="button" class="btn btn-block btn-danger">환불</button>

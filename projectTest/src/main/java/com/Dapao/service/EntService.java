@@ -13,4 +13,6 @@ public interface EntService {
 	public List<EntVO> listEnt(EntVO vo);
 	// 가게 주문 리스트 조회
 	public List<TradeVO> searchTrade(PageVO vo);
+	// 가게 주문 리스트 갯수
+	public int searchTradeCount(PageVO vo);
 }

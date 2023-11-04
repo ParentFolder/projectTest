@@ -27,14 +27,21 @@ public class EntServiceImpl implements EntService {
 
 	@Override
 	public List<EntVO> listEnt(EntVO vo) {
-		logger.debug(" sevice listEnt(String own_id) 호출 ");
+		logger.debug(" service listEnt(String own_id) 호출 ");
 		return edao.listEnt(vo);
 	}
 
 	@Override
 	public List<TradeVO> searchTrade(PageVO vo) {
-		logger.debug(" seviced listTrade(String own_id) 호출 ");
+		logger.debug(" service listTrade(String own_id) 호출 ");
 		return edao.searchTrade(vo);
 	}
+
+	@Override
+	public int searchTradeCount(PageVO vo) {
+		logger.debug(" service searchTradeCount(PageVO vo) 호출 ");
+		return edao.searchTradeCount(vo);
+	}
+	
 	
 }

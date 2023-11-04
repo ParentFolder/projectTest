@@ -34,5 +34,10 @@ public class EntDAOImpl implements EntDAO {
 		logger.debug("DAO listTrade(String own_id) 호출 ");
 		return sqlSession.selectList(NAMESPACE+".searchTrade", vo);
 	}
+	@Override
+	public int searchTradeCount(PageVO vo) {
+		logger.debug(" DAO searchTradeCount(PageVO vo) 호출 ");
+		return sqlSession.selectOne(NAMESPACE+".searchTradeCount", vo);
+	}
 	
 }

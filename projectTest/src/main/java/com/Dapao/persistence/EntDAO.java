@@ -13,5 +13,7 @@ public interface EntDAO {
 	public List<EntVO> listEnt(EntVO vo);
 	// 가게 검색조건에 따른 주문 리스트 조회
 	public List<TradeVO> searchTrade(PageVO vo);
+	// 가게 검색조건에 따른 주문 리스트 총갯수
+	public int searchTradeCount(PageVO vo);
 	
 }
