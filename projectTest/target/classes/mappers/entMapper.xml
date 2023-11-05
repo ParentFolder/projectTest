@@ -85,6 +85,12 @@
 	</select>
 	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
 
+	<!-- 전달받은 주문 환불 -->
+	<delete id="refund">
+		delete from trade
+		where tr_no = #{tr_no}
+	</delete>
+	<!-- 전달받은 주문 환불 -->
 
 
 </mapper>

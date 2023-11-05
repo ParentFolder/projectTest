@@ -85,7 +85,7 @@
 								<td class="price_value">${list.prod_price }</td>
 								<td class="state_value">${list.prod_state }</td>
 								<td>
-									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" <%-- 										data-prod="${list }" --%>
+									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" 
 										data-prod_no="${list.prod_no }" data-prod_name="${list.prod_name }" data-prod_con="${list.prod_con }" data-prod_price="${list.prod_price }" data-prod_content="${list.prod_content }" data-prod_cate="${list.prod_cate }" data-prod_img="${list.prod_img }" data-own_id="${list.own_id }" data-modal_cate=1>수정</button>
 								</td>
 							</tr>
@@ -181,9 +181,9 @@
 	// 	input.value = null;
 		console.log('${own_id}');
 	$(function() {
-		$('.bnt_modal').click(function() {
-			$('#modal-default').modal('show');
-		});
+// 		$('.bnt_modal').click(function() {
+// 			$('#modal-default').modal('show');
+// 		});
 		$('#modal-default').on("show.bs.modal", function(e) {
 			$('.box-title').remove();
 			$('#prod_id').remove();

@@ -195,6 +195,11 @@ public class EntController {
 			model.addAttribute("plist", plist);
 			model.addAttribute("pageVO", vo);
 		}
+		@RequestMapping(value = "/refund", method = RequestMethod.GET)
+		public String refundGET(TradeVO vo) {
+			eService.refund(vo);
+			return "redirect:/ent/entOrder";
+		}
 
 }
 

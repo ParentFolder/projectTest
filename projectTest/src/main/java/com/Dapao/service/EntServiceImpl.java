@@ -42,6 +42,12 @@ public class EntServiceImpl implements EntService {
 		logger.debug(" service searchTradeCount(PageVO vo) 호출 ");
 		return edao.searchTradeCount(vo);
 	}
+
+	@Override
+	public void refund(TradeVO vo) {
+		logger.debug(" service refund(TradeVO vo) 호출 ");
+		edao.refund(vo);
+	}
 	
 	
 }

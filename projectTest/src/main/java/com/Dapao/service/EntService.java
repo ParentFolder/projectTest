@@ -15,4 +15,6 @@ public interface EntService {
 	public List<TradeVO> searchTrade(PageVO vo);
 	// 가게 주문 리스트 갯수
 	public int searchTradeCount(PageVO vo);
+	// 주문 환불
+	public void refund(TradeVO vo);
 }

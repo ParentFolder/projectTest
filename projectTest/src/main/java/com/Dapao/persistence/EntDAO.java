@@ -15,5 +15,7 @@ public interface EntDAO {
 	public List<TradeVO> searchTrade(PageVO vo);
 	// 가게 검색조건에 따른 주문 리스트 총갯수
 	public int searchTradeCount(PageVO vo);
+	// 주문 환불
+	public void refund(TradeVO vo);
 	
 }
