@@ -2,6 +2,7 @@ package com.Dapao.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -168,22 +169,25 @@ public class EntController {
 
 	@RequestMapping(value = "/productUpdate", method = RequestMethod.POST)
 	public String productUpdatePOST(ProdVO vo, Integer modal_cate,
-			final MultipartHttpServletRequest mhsr,HttpServletRequest req) throws Exception {
+			final MultipartHttpServletRequest mhsr) throws Exception {
 		logger.debug(" productUpdatePOST() 호출 ");
 		logger.debug(" vo : " + vo);
 		logger.debug(" modal_cate : " + modal_cate);
-		List<MultipartFile> fileList = mhsr.getFiles("prod_img");
-		List<String> imgList = null;
+		List<MultipartFile> fileList = mhsr.getFiles("file");
+		logger.debug(" fileList : "+fileList);
+		ArrayList<String> imgList = new ArrayList<String>();
 		String path = mhsr.getServletContext().getRealPath("/upload"); // 경로
+		logger.debug(" path : "+path);
 		for (MultipartFile mf : fileList) {
 			String genId = UUID.randomUUID().toString(); // 중복 처리
 			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 
 			String saveFile = path + genId + "/" + originFileName; // 저장할 파일명
+			logger.debug(" saveFile : "+saveFile);
 			imgList.add(saveFile);
-
+			logger.debug("imgList : "+imgList);
 			mf.transferTo(new File(saveFile));
-	
+			logger.debug("mf 됨");
 		}
 		vo.setProd_img(String.join("@", imgList));
 		if (modal_cate == 1) {

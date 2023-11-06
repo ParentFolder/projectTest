@@ -34,7 +34,7 @@
 
 <div class="container">
 	<div class="search_container">
-		<input type="button" value="상품등록" class="btn btn-success" data-toggle="modal" data-target="#modal-default" data-own_id="${ent.own_id }" data-modal_cate=0>
+		<input type="button" value="상품등록" class="btn btn-success" data-toggle="modal" data-target="#modal-default" data-own_id="${own_id }" data-modal_cate=0>
 		<form action="" method="post">
 			<table class="table table-hover">
 				<tr>
@@ -157,8 +157,9 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="prod_img">상품이미지</label> <input type="file" id="prod_img" name="prod_img" multiple="multiple">
-								<p class="help-block">Example block-level help text here.</p>
+								<label for="prod_img">상품이미지</label> <input type="file" id="prod_img" name="file" multiple="multiple">
+								<button type="button" class="btn_new_file">추가</button>
+								<div class="file_area"></div>
 							</div>
 						</div>
 
@@ -177,7 +178,7 @@
 </div>
 <script type="text/javascript">
 	$(function() {
-		$('#modal-default').on("show.bs.modal", function(e) {
+		$('#modal-default').on("show.bs.modal", function(e) { //모달켜지면
 			$('.box-title').remove();
 			$('#prod_id').remove();
 			console.log(e.relatedTarget);
@@ -190,10 +191,10 @@
 			var prod_img = $(e.relatedTarget).data('prod_img');
 			var own_id = $(e.relatedTarget).data('own_id') * 1;
 			var modal_cate = $(e.relatedTarget).data('modal_cate') * 1;
-			
+// 			var img = prod_img.substring(prod_img.lastIndexOf("/")+1);
 			console.log(prod_no);
 			console.log(own_id);
-			console.log(prod_con);
+			console.log(prod_img);
 			if (prod_con == '새상품') {
 				$('#p_radio2').attr("checked", true);
 			} else {
@@ -204,7 +205,7 @@
 			$('#prod_price').val(prod_price);
 			$('#prod_content').val(prod_content);
 			$('#prod_cate').val(prod_cate).prop("selected", true);
-			$('#prod_img').val(prod_img);
+// 			$('#prod_img').val(img);
 			$('#own_id').val(own_id);
 			$('#modal_cate').val(modal_cate);
 
@@ -216,6 +217,16 @@
 				$('.box-header').append('<h3 class="box-title">상품 등록하기</h3>')
 			}
 			$('#prod_no').val(prod_no);
+			
+			/*  첨부파일 추가,삭제 */
+			$('.btn_new_file').click(function(){ 
+				$('.file_area').append('<div class="form-inline">' 
+				+ '<input type="file" name="file" class="form-control">' 
+				+ ' <button type="button" class="btn_delete btn btn-sm">삭제</button>' + '</div>'); 
+				}); 
+			$('.file_area').on('click','.btn_delete', function(){ 
+				$(this).closest('div').remove(); 
+				});
 		});
 	});
 </script>

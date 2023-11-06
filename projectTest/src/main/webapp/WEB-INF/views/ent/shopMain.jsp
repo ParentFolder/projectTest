@@ -75,7 +75,9 @@
 		map.setCenter(coords);
 		}
 	});
-
+	/* prod 이미지  */
+	$(function() {
+	});
 	</script>
 <%@ include file="../include/footer.jsp"%>
 
