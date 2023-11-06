@@ -130,8 +130,7 @@
 					<div class="box-header with-border"></div>
 
 
-					<form role="form" action="/ent/productUpdate" method="post">
-						<div class="test"></div>
+					<form role="form" action="/ent/productUpdate" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="own_id" id="own_id"> <input type="hidden" name="modal_cate" id="modal_cate">
 						<div class="box-body">
 							<div class="form-group">
@@ -158,7 +157,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="prod_img">상품이미지</label> <input type="file" id="prod_img" name="prod_img">
+								<label for="prod_img">상품이미지</label> <input type="file" id="prod_img" name="prod_img" multiple="multiple">
 								<p class="help-block">Example block-level help text here.</p>
 							</div>
 						</div>
@@ -177,17 +176,10 @@
 	</div>
 </div>
 <script type="text/javascript">
-	// 	var input = document.getElementById("search_name");
-	// 	input.value = null;
-		console.log('${own_id}');
 	$(function() {
-// 		$('.bnt_modal').click(function() {
-// 			$('#modal-default').modal('show');
-// 		});
 		$('#modal-default').on("show.bs.modal", function(e) {
 			$('.box-title').remove();
 			$('#prod_id').remove();
-			// 			var prod = $(e.relatedTarget).data('prod');
 			console.log(e.relatedTarget);
 			var prod_no = $(e.relatedTarget).data('prod_no') * 1;
 			var prod_name = $(e.relatedTarget).data('prod_name');
@@ -212,7 +204,7 @@
 			$('#prod_price').val(prod_price);
 			$('#prod_content').val(prod_content);
 			$('#prod_cate').val(prod_cate).prop("selected", true);
-			// 			$('#prod_img').val(prod_img);
+			$('#prod_img').val(prod_img);
 			$('#own_id').val(own_id);
 			$('#modal_cate').val(modal_cate);
 
