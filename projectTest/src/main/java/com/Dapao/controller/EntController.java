@@ -47,7 +47,17 @@ public class EntController {
 		logger.debug("eService.listEnt(eVo): " + eService.listEnt(eVo));
 		List<ProdVO> plist = pService.listProd(eVo);
 		logger.debug(" plist : " + plist);
-
+		String fileList[] = new String[plist.size()];
+		for(int i =0; i < plist.size(); i++) {
+			fileList[i]=plist.get(i).getProd_img().substring(plist.get(i).getProd_img().lastIndexOf("\\")+1);
+//			fileList[i]=plist.get(i).getProd_img();
+			logger.debug(" fileList[i] : "+fileList[i]);
+			
+//			logger.debug(" plist.get(i).getProd_img().split(\"@\"): "+plist.get(i).getProd_img().split("@"));
+		}
+		logger.debug("fileList : "+fileList);
+		
+		model.addAttribute("fileList", fileList);
 		model.addAttribute("ent", eService.listEnt(eVo));
 		model.addAttribute("plist", plist);
 
@@ -177,12 +187,14 @@ public class EntController {
 		logger.debug(" fileList : "+fileList);
 		ArrayList<String> imgList = new ArrayList<String>();
 		String path = mhsr.getServletContext().getRealPath("/upload"); // 경로
+		File dir = new File(path);
+		if (!dir.isDirectory()) {dir.mkdirs();}
 		logger.debug(" path : "+path);
 		for (MultipartFile mf : fileList) {
 			String genId = UUID.randomUUID().toString(); // 중복 처리
 			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 
-			String saveFile = path + genId + "/" + originFileName; // 저장할 파일명
+			String saveFile = path +"\\"+ genId + "%" + originFileName; // 저장할 파일명
 			logger.debug(" saveFile : "+saveFile);
 			imgList.add(saveFile);
 			logger.debug("imgList : "+imgList);

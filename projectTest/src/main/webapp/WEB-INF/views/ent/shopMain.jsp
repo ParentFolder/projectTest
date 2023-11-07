@@ -1,43 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp"%>
-	<div class="ent_container">
-		<div class="img_container">
-<!-- 			<div class="ent_img"> -->
-<%-- 				<img src="${ent[0].img}"> --%>
-<!-- 			</div> -->
-<!-- 			<div> -->
-<%-- 				<img src="${plist.img }"> --%>
-<!-- 			</div> -->
-		</div>
-		<div class="notice_container">${ent[0].ent_notice}</div>
-		<div id="map" style="width: 500px; height: 400px;"></div>
-		<div class="menu_container">
-			<table>
-				<c:forEach items="${plist }" var="prod">
-					<tr class="prod_name">
-						<td>${prod.prod_name }</td>
-					</tr>
-					<tr class="prod_content">
-						<td>${prod.prod_content }</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-<!-- 		<div class="review_container"> -->
-<%-- 			<c:forEach items="${review }" var="rv"> --%>
-<!-- 				<tr class="review"> -->
-<%-- 					<td class="reviewer">${rv.buy }</td> --%>
-<%-- 					<td class="review_content">${rv.content }</td> --%>
-<!-- 				</tr> -->
-<%-- 			</c:forEach> --%>
-<!-- 		</div> -->
+<div class="ent_container">
+	<div class="img_container">
+		<!-- 			<div class="ent_img"> -->
+		<%-- 				<img src="${ent[0].img}"> --%>
+		<!-- 			</div> -->
+		<c:forEach items="${fileList }" var="img">
+					<div>
+						<p>${img }</p>
+						<img src="<c:url value="/upload/${img }"/>"/>
+					</div>
+		</c:forEach>
 	</div>
+	<div class="notice_container">
+		<p> 공지사항 </p>
+		${ent[0].ent_notice}
+	</div>
+	<div id="map" style="width: 500px; height: 400px;"></div>
+	<div class="menu_container">
+		<table>
+			<c:forEach items="${plist }" var="prod">
+				<tr class="prod_name">
+					<td> 제품명 </td>
+					<td>${prod.prod_name }</td>
+				</tr>
+				<tr class="prod_content">
+					<td> 제품 설명 </td>
+					<td>${prod.prod_content }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	<!-- 		<div class="review_container"> -->
+	<%-- 			<c:forEach items="${review }" var="rv"> --%>
+	<!-- 				<tr class="review"> -->
+	<%-- 					<td class="reviewer">${rv.buy }</td> --%>
+	<%-- 					<td class="review_content">${rv.content }</td> --%>
+	<!-- 				</tr> -->
+	<%-- 			</c:forEach> --%>
+	<!-- 		</div> -->
+</div>
 
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a41c6623d85b187520b3d92f4b708850&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a41c6623d85b187520b3d92f4b708850&libraries=services"></script>
 ​
-	<script type="text/javascript">
+<script type="text/javascript">
 	
 	var container = document.getElementById('map'), //지도를 담을 영역의 DOM 레퍼런스
 		options = { //지도를 생성할 때 필요한 기본 옵션
@@ -77,7 +84,15 @@
 	});
 	/* prod 이미지  */
 	$(function() {
+		console.log('${fileList}');
+// 		console.log(pList);
+// 		for(var i=0; i< fileList.length(); i++){
+// 			fileList.split("@");
+// 			console.log(fileList);
+// 		}
+		
+// 		console.log(file);
 	});
-	</script>
+</script>
 <%@ include file="../include/footer.jsp"%>
 
