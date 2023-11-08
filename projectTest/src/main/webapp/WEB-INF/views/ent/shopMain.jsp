@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  prefix="spring" uri="http://www.springframework.org/tags" %> 
 <%@ include file="../include/header.jsp"%>
 <div class="ent_container">
 	<div class="img_container">
@@ -9,7 +10,11 @@
 		<c:forEach items="${fileList }" var="img">
 					<div>
 						<p>${img }</p>
-						<img src="<c:url value="/upload/${img }"/>"/>
+						<img src="<c:url value="${pageContext.request.contextPath }/resources/upload/${img }"/>"/>
+						<img src="${pageContext.request.contextPath }/resources/upload/${img }">
+						<img src="http://localhost:8088/resources/upload/${img }">
+						<img src="<spring:url value='${pageContext.request.contextPath }/resources/upload/${img }'/>">
+							
 					</div>
 		</c:forEach>
 	</div>

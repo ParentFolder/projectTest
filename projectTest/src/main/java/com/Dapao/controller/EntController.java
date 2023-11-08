@@ -186,7 +186,7 @@ public class EntController {
 		List<MultipartFile> fileList = mhsr.getFiles("file");
 		logger.debug(" fileList : "+fileList);
 		ArrayList<String> imgList = new ArrayList<String>();
-		String path = mhsr.getServletContext().getRealPath("/upload"); // 경로
+		String path = mhsr.getServletContext().getRealPath("/resources/upload"); // 경로
 		File dir = new File(path);
 		if (!dir.isDirectory()) {dir.mkdirs();}
 		logger.debug(" path : "+path);
