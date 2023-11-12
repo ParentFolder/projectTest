@@ -7,27 +7,24 @@
 
 <mapper namespace="com.Dapao.mapper.EntMapper">
 	<resultMap type="TradeVO" id="resultMap">
-		<result column="tr_no" property="tr_no"/>
-		<result column="tr_sell_ent" property="tr_sell_ent"/>
-		<result column="tr_sell_us" property="tr_sell_us"/>
-		<result column="tr_buy" property="tr_buy"/>
-		<result column="tr_prod" property="tr_prod"/>
-		<result column="tr_item" property="tr_item"/>
-		<result column="tr_price" property="tr_price"/>
-		<collection property="prodVO" resultMap="prodVO"/>
+		<result column="tr_no" property="tr_no" />
+		<result column="tr_sell_ent" property="tr_sell_ent" />
+		<result column="tr_sell_us" property="tr_sell_us" />
+		<result column="tr_buy" property="tr_buy" />
+		<result column="tr_prod" property="tr_prod" />
+		<result column="tr_item" property="tr_item" />
+		<result column="tr_price" property="tr_price" />
+		<collection property="prodVO" resultMap="prodVO" />
 
-		<!-- 1 : 다 관계의 경우 데이터 매핑시켜준다. 
-			association => 1 : 1 관계 
-			collection => 1 : 다 관계 (한명의 유저가 작성한 글 목록)
-			일반 컬럼과 pk 구분 가능 pk 칼럼에게는 result 아닌 id 사용
-		-->
-		
+		<!-- 1 : 다 관계의 경우 데이터 매핑시켜준다. association => 1 : 1 관계 collection => 1 : 
+			다 관계 (한명의 유저가 작성한 글 목록) 일반 컬럼과 pk 구분 가능 pk 칼럼에게는 result 아닌 id 사용 -->
+
 	</resultMap>
 	<resultMap type="ProdVO" id="prodVO">
-<!-- 		<result column="prod_no" property="prod_no"/> -->
-<!-- 		<result column="own_id" property="own_id"/> -->
-		<result column="prod_name" property="prod_name"/>
-		<result column="prod_price" property="prod_price"/>
+		<!-- <result column="prod_no" property="prod_no"/> -->
+		<!-- <result column="own_id" property="own_id"/> -->
+		<result column="prod_name" property="prod_name" />
+		<result column="prod_price" property="prod_price" />
 	</resultMap>
 
 	<update id="entUpdate">
@@ -69,11 +66,14 @@
 	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
 
 	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
-	<select id="searchTrade" parameterType="TradeVO" resultMap="resultMap">
+	<select id="searchTrade" parameterType="TradeVO"
+		resultMap="resultMap">
 		select t.tr_no, t.tr_buy, t.tr_prod, p.prod_name,p.prod_price
-		from trade t inner join product p
+		from
+		trade t inner join product p
 		on t.tr_prod=p.prod_no
-		where p.own_id= #{p_vo.own_id}
+		where p.own_id=
+		#{p_vo.own_id}
 		<if test='p_vo.prod_name != null and p_vo.prod_name != ""'>
 			AND p.prod_name like concat('%',#{p_vo.prod_name},'%')
 		</if>
@@ -92,5 +92,14 @@
 	</delete>
 	<!-- 전달받은 주문 환불 -->
 
+	<insert id="entJoin">
+		insert into
+		ent(own_id,own_name,own_pw,own_tel,own_email,ent_name,ent_cate,ent_addr,ent_mo,ent_file)
+		values(#{own_id},#{own_name},#{own_pw},#{own_tel},#{own_email},#{ent_name},#{ent_cate},#{ent_addr},#{ent_mo},#{ent_file})
+	</insert>
 
+	<select id="entLogin" resultType="EntVO">
+		select * from ent
+		where own_id=#{own_id} and own_pw=#{own_pw}
+	</select>
 </mapper>

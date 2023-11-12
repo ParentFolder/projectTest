@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/entHeader.jsp"%>
 <!-- <link rel="stylesheet" -->
 <!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <!-- <script -->
@@ -9,25 +9,7 @@
 <!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 <h1>상품등록,수정,조회(productManage.jsp)</h1>
-<!-- include -->
-<!-- <div class="left"> -->
-<!-- 	<div class="shop_container"> -->
-<!-- 		<p class="left_subject">상점 메뉴</p> -->
-<!-- 		<p class="left_list">상점 메인페이지</p> -->
-<!-- 		<p class="left_list">상점 추천상품</p> -->
-<!-- 	</div> -->
-<!-- 	<div class="product_container"> -->
-<!-- 		<p class="left_subject">상품/주문 관리</p> -->
-<!-- 		<p class="left_list">상품등록/수정/조회</p> -->
-<!-- 		<p class="left_list">주문관리</p> -->
-<!-- 	</div> -->
-<!-- 	<div class="talk_container"> -->
-<!-- 		<p class="left_subject">판다톡 관리</p> -->
-<!-- 		<p class="left_list">자주쓰는 문구</p> -->
-<!-- 		<p class="left_list">자동응답설정</p> -->
-<!-- 	</div> -->
-<!-- </div> -->
-<!-- include -->
+
 <div>
 	<p>상품 등록/수정/조회</p>
 </div>

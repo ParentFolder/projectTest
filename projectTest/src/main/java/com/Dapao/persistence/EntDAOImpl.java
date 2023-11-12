@@ -44,5 +44,17 @@ public class EntDAOImpl implements EntDAO {
 		logger.debug(" DAO refund(TradeVO vo) 호출 ");
 		sqlSession.delete(NAMESPACE+".refund", vo);
 	}
+	@Override
+	public void entJoin(EntVO vo) throws Exception {
+		logger.debug("DAOImpl entJoin() 실행 ");
+		sqlSession.insert(NAMESPACE+".entJoin",vo);
+		
+	}
+	@Override
+	public EntVO entLogin(EntVO vo) throws Exception {
+		logger.debug("DAOImpl entLogin() 실행");
+		
+		return sqlSession.selectOne(NAMESPACE+".entLogin",vo);
+	}
 	
 }

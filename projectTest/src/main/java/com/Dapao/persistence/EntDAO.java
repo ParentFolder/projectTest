@@ -18,4 +18,8 @@ public interface EntDAO {
 	// 주문 환불
 	public void refund(TradeVO vo);
 	
+	public void entJoin(EntVO vo) throws Exception;
+	
+	public EntVO entLogin(EntVO vo) throws Exception;
+	
 }

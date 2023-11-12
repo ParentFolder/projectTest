@@ -48,6 +48,19 @@ public class EntServiceImpl implements EntService {
 		logger.debug(" service refund(TradeVO vo) 호출 ");
 		edao.refund(vo);
 	}
-	
+
+	@Override
+	public void entJoin(EntVO vo) throws Exception {
+		logger.debug("컨트롤러 -> entJoin()서비스 호출");
+		edao.entJoin(vo);
+		
+	}
+
+	@Override
+	public EntVO entLogin(EntVO vo) throws Exception {
+		logger.debug("컨트롤러 -> entLogin()서비스 호출");
+		
+		return edao.entLogin(vo);
+	}
 	
 }
