@@ -55,10 +55,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="exampleInputFile">File input</label> <input type="file"
-					id="exampleInputFile" name="file">
-				<p class="help-block">Example block-level help text here.</p>
+			<div>
+				<img src="${pageContext.request.contextPath }/ent/download?imageFileName=${ent[0].ent_img}">
+				<button class="img_update" type="button"> 이미지 변경/추가</button>
+				<ul class="img_container">
+				
+				</ul>
 			</div>
 		</div>
 
@@ -73,6 +75,22 @@
 		$('.timepicker').timepicker({
 			showInputs : false
 		});
+		
+		// 이미지 변경
+		$('.img_update').click(function () {
+			$(".img_container").append("<li><input type='file' name='file'>"+
+					"<button class='remove' type='button' onclick='del(this)'>삭제</button> </li>" );
+		});
+		
+// 		$('.remove').click(function () {
+// // 			$(this).remove();
+// // 			$(this).parent().remove();
+// 			$(this).closest("li").remove();
+// 		});
+		
+		function del(e) {
+			$(e).remove();
+		}
 		
 		
 

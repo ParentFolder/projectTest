@@ -68,7 +68,7 @@
 	<!-- 페이징된 검색조건에 따른 주문리스트 조회 -->
 	<select id="searchTrade" parameterType="TradeVO"
 		resultMap="resultMap">
-		select t.tr_no, t.tr_buy, t.tr_prod, p.prod_name,p.prod_price
+		select t.tr_no, t.us_id, t.tr_prod, p.prod_name,p.prod_price
 		from
 		trade t inner join product p
 		on t.tr_prod=p.prod_no

@@ -18,11 +18,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.Dapao.domain.EntVO;
 import com.Dapao.domain.PageVO;
@@ -46,8 +49,8 @@ public class EntController {
 	@RequestMapping(value = "/shopMain", method = RequestMethod.GET)
 	public void shopMainGET(HttpSession session, ReviewVO rVo, Model model) throws Exception {
 		logger.debug(" shopMainGET(EntVO eVO, ProdVO pVO, ReviewVO rVO, Model model) 호출 ");
-		String own_id = "6";
-//		String own_id = (String) session.getAttribute("own_id");
+//		String own_id = "6";
+		String own_id = (String) session.getAttribute("own_id");
 
 		EntVO eVo = new EntVO();
 		eVo.setOwn_id(own_id);
@@ -69,7 +72,7 @@ public class EntController {
 		model.addAttribute("plist", plist);
 		model.addAttribute("name", name);
 
-		session.setAttribute("own_id", own_id);
+//		session.setAttribute("own_id", own_id);
 
 		logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
 	}
@@ -78,8 +81,8 @@ public class EntController {
 	@RequestMapping(value = "/shopMainManage", method = RequestMethod.GET)
 	public void shopMainManageGET(HttpSession session, Model model) {
 		logger.debug(" shopMainManageGET(EntVO eVo, Model model) 호출 ");
-		String own_id = "6";
-//		String own_id = (String) session.getAttribute("own_id");
+//		String own_id = "6";
+		String own_id = (String) session.getAttribute("own_id");
 		String name = "상점 메인페이지 수정";
 		EntVO eVo = new EntVO();
 		eVo.setOwn_id(own_id);
@@ -87,23 +90,25 @@ public class EntController {
 		logger.debug("eService.listEnt(eVo): " + eService.listEnt(eVo));
 		model.addAttribute("ent", eService.listEnt(eVo));
 		model.addAttribute("name", name);
-		session.setAttribute("own_id", own_id);
+//		session.setAttribute("own_id", own_id);
 		logger.debug(" 연결된 뷰페이지(/views/ent/shopMain.jsp) 출력 ");
 	}
 
 	// http://localhost:8088/ent/shopMainManage
 	@RequestMapping(value = "/shopMainManage", method = RequestMethod.POST)
-	public void shopMainManagePOST(EntVO eVo, Model model, MultipartHttpServletRequest mhsr,
-			HttpServletResponse response) throws IllegalStateException, IOException {
+	public void shopMainManagePOST(EntVO eVo, Model model, HttpSession session,
+			MultipartHttpServletRequest mhsr, HttpServletResponse response) throws IllegalStateException, IOException {
 		logger.debug(" shopMainManagePOST(EntVO eVo, Model model) 호출 ");
-		String id = "6";
+//		String own_id = "6";
+		String own_id = (String) session.getAttribute("own_id");
 		String name = "상점 메인페이지 수정";
-		eVo.setOwn_id(id);
+		eVo.setOwn_id(own_id);
 		logger.debug(" eVo : " + eVo);
 		List<MultipartFile> fileList = mhsr.getFiles("file");
 		logger.debug(" fileList : " + fileList);
 		ArrayList<String> imgList = new ArrayList<String>();
 		String path = "C:\\upload"; // 경로
+//		String path = "F:\\upload"; // 경로
 		File dir = new File(path);
 		if (!dir.isDirectory()) {
 			dir.mkdirs();
@@ -134,19 +139,24 @@ public class EntController {
 	public void productManageGET(HttpSession session, Model model) {
 		logger.debug(" productManageGET()");
 		logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
+		String own_id = (String) session.getAttribute("own_id");
+//		String own_id = "6";
 		Integer modal_cate = 0;
 		String name = "상품 조회/수정/등록";
 		session.setAttribute("modal_cate", modal_cate);
-		session.setAttribute("own_id", "6");
+//		session.setAttribute("own_id", "6");
 		model.addAttribute("name", name);
 	}
 
 	// http://localhost:8088/ent/productManage
 	@RequestMapping(value = "/productManage", method = RequestMethod.POST)
-	public void productManagePOST(ProdVO vo, Model model, PageVO pVo) throws Exception {
+	public void productManagePOST(ProdVO vo, Model model, PageVO pVo,HttpSession session) throws Exception {
 		logger.debug(" productManagerPOST() ");
 		String name = "상품 조회/수정/등록";
+		String own_id = (String) session.getAttribute("own_id");
+//		String own_id = "6";
 		logger.debug(" vo : " + vo);
+		vo.setOwn_id(own_id);
 		pVo.setP_vo(vo);
 		pVo.setTotalCount(pService.getProdList(vo.getOwn_id()));
 		logger.debug(" pVo : " + pVo);
@@ -158,13 +168,31 @@ public class EntController {
 		model.addAttribute("name", name);
 		logger.debug(" 연결된 뷰페이지(/views/ent/productManage.jsp)출력 ");
 	}
+//	@RequestMapping(value = "/productAd", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<ProdVO> productAdGET(ModelAndView mav,PageVO pVo,HttpSession session) throws Exception {
+//		logger.debug(" productManagerPOST() ");
+//		String own_id = (String) session.getAttribute("own_id");
+////		String own_id = "6";
+//		ProdVO vo = new ProdVO();
+//		logger.debug(" vo : " + vo);
+//		vo.setOwn_id(own_id);
+//		pVo.setP_vo(vo);
+//		pVo.setTotalCount(pService.getProdList(vo.getOwn_id()));
+//		logger.debug(" pVo : " + pVo);
+//		List<ProdVO> plist = pService.searchProd(pVo);
+////		model.addAttribute("pageVO", pVo);
+//		mav.addObject("pageVO", pVo);
+//		return plist;
+//	}
 
 	// http://localhost:8088/ent/entOrder
 	// http://localhost:8088/ent/entOrder?own_id=6
 	@RequestMapping(value = "/entOrder", method = RequestMethod.GET)
-	public void orderGET(@RequestParam("own_id") String own_id, Model model) {
+	public void entOrderGET(HttpSession session, Model model) {
 		logger.debug(" entOrderGET() ");
-		logger.debug(" own_id : " + own_id);
+//		String own_id = (String) session.getAttribute("own_id");
+		String own_id = "6";
 		String name = "주문관리";
 		model.addAttribute("own_id", own_id);
 		model.addAttribute("name", name);
@@ -173,8 +201,11 @@ public class EntController {
 
 	// http://localhost:8088/ent/entOrder
 	@RequestMapping(value = "/entOrder", method = RequestMethod.POST)
-	public void orderPOST(PageVO vo, String search_cate, String search, String own_id, Model model) throws Exception {
+	public void entOrderPOST(PageVO vo, String search_cate, String search, 
+			HttpSession session, Model model) throws Exception {
 		logger.debug(" entOrderPOST(PageVO vo, String search, Model model) 호출 ");
+//		String own_id = (String) session.getAttribute("own_id");
+		String own_id = "6";
 		ProdVO pVo = new ProdVO();
 		String name = "주문관리";
 		logger.debug(" pageVo " + vo);
@@ -291,7 +322,7 @@ public class EntController {
 		return "redirect:/ent/entOrder";
 	}
 
-	@RequestMapping("/download")
+	@RequestMapping(value = "/download")
 	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response,
 			HttpServletRequest req) throws Exception {
 		// String downFile = CURR_IMAGE_REPO_PATH + "\\" + imageFileName;
@@ -377,4 +408,14 @@ public class EntController {
 
 		return "redirect:/ent/entMain";
 	}
+	@RequestMapping(value = "/entAd", method = RequestMethod.GET)
+	public void entAdGET(HttpSession session, Model model) {
+		logger.debug(" entOrderGET() ");
+//		String own_id = (String) session.getAttribute("own_id");
+//		String own_id = "6";
+		String name = "주문관리";
+		model.addAttribute("name", name);
+		logger.debug(" 연결된 뷰페이지(/views/entOrder.jsp)출력 ");
+	}
+
 }

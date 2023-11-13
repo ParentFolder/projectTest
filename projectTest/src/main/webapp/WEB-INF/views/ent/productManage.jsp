@@ -8,11 +8,8 @@
 <!-- <script -->
 <!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
-<h1>상품등록,수정,조회(productManage.jsp)</h1>
 
-<div>
-	<p>상품 등록/수정/조회</p>
-</div>
+
 
 <div class="container">
 	<div class="search_container">
@@ -65,7 +62,20 @@
 								<td class="name_value">${list.prod_name }</td>
 								<td class="con_value">${list.prod_con }</td>
 								<td class="price_value">${list.prod_price }</td>
-								<td class="state_value">${list.prod_state }</td>
+								<td class="state_value">
+									<c:choose>
+										<c:when test="${list.prod_state == 0}">
+											등록
+										</c:when>
+										<c:when test="${list.prod_state == 1}">
+											매진
+										</c:when>
+										<c:otherwise>
+											삭제
+										</c:otherwise>
+									</c:choose>
+									
+								</td>
 								<td>
 									<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default" 
 										data-prod_no="${list.prod_no }" data-prod_name="${list.prod_name }" data-prod_con="${list.prod_con }" data-prod_price="${list.prod_price }" data-prod_content="${list.prod_content }" data-prod_cate="${list.prod_cate }" data-prod_img="${list.prod_img }" data-own_id="${list.own_id }" data-modal_cate=1>수정</button>
